@@ -1,5 +1,14 @@
-let time = prompt("Введите дату в формате YYYY-MM-DD", ""),
-    money = prompt("Ваш бюджет на меся?", "");
+let money, time;
+
+function star() {
+    time = prompt("Введите дату в формате YYYY-MM-DD", "");
+    money = +prompt("Ваш бюджет на меся?", "");
+
+    while(isNaN(money) || money == "" || money == null){
+        money = +prompt("Ваш бюджет на меся?", "");
+    }
+}
+star();
 
 let appData = {
     budget: money, 
@@ -7,22 +16,25 @@ let appData = {
     expenses: {},
     optionalExpenses: {},
     income: [],
-    savings: false
+    savings: true
 };
 
-for(let i = 0; i < 2; i++){
-    let a = prompt("Введите обязательную статью расходов в этом месяце", ""),
-        b = prompt("Во сколько обойдется?", '');
+function chooseExpanses() {
+    for(let i = 0; i < 2; i++){
+        let a = prompt("Введите обязательную статью расходов в этом месяце", ""),
+            b = prompt("Во сколько обойдется?", '');
+    
+        if( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null && a != '' && b != '' && a.length < 50 ){
+            console.log("done");
+            appData.expenses[a] = b;
+        }else{
+            i = i - 1;
+        }    
+    }
+}
+chooseExpanses();
 
-    if( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null && a != '' && b != '' && a.length < 50 ){
-        console.log("done");
-        appData.expenses[a] = b;
-    }else{
-        i = i - 1;
-    }    
-};
-
-appData.moneyPerDay = appData.budget/30;
+appData.moneyPerDay = (appData.budget/30).toFixed( );
 
 alert('Ежедневный бюджет: ' +appData.moneyPerDay);
 
@@ -35,4 +47,15 @@ if(appData.moneyPerDay < 100){
 }else{
     console.log('Произошла ошибка');
 }
-console.log(appData.expenses);
+
+function checkSavings(){
+    if(appData.savings == true){
+        let save = +prompt('Какова сумма накоплений?'),
+            percent = +prompt('Под какой процент ?');
+
+        appData.monthIncome = save/100/12*percent;
+        alert("Доход  в месяц с вашего депозита: " + appData.monthIncome);
+    }
+}
+
+checkSavings();
