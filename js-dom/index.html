@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            background: red;
+            height: 100px;
+            width: 200px;
+        }
+
+        button{
+            width: 200px;
+            height: 50px;
+            background: black;
+            color: white;
+            margin-top: 10px;
+        }
+        .circle{
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 10px;
+            border-radius: 50%;    
+        }
+        .heart{
+            width: 150px;
+            height: 50px;
+            background: red;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box"></div>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+    
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+    <div class="wrapper">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+    <script>
+        let box = document.getElementById('box'),
+            button = document.getElementsByTagName('button'),
+            circle = document.getElementsByClassName('circle'),
+            heart = document.querySelectorAll('.heart'),
+            wrappper = document.querySelector('.wrapper');
+        box.style.background = 'blue';
+        button[1].style.borderRadius = '50%';
+
+        for(let i = 0; i < circle.length; i++){
+            let array = ['red','orange','green'];
+            circle[i].style.background = array[i];
+        }
+
+        heart.forEach((element, i) => {
+            element.style.background = 'green';
+        });
+
+        // создаем новый элемент 
+        let div = document.createElement('div');
+        div.classList.add('heart');
+
+        // wrappper.appendChild(div);
+        wrappper.insertBefore(div, heart[1]);
+
+        wrappper.removeChild(heart[0]);
+
+        document.body.replaceChild(button[1], circle[1  ]);
+
+        div.innerHTML = '<h1>Hello Word!</h1>'
+    
+    </script>
+</body>
+</html>
